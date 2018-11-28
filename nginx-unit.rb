@@ -3,8 +3,8 @@
 class NginxUnit < Formula
   desc "Dynamic web and application server for multiple languages"
   homepage "https://unit.nginx.org/"
-  url "https://unit.nginx.org/download/unit-1.1.tar.gz"
-  sha256 "7c66365f5ea87e7e8903bac9d639676947fe2ab7aa799ce35defc426b3409ee0"
+  url "https://unit.nginx.org/download/unit-1.6.tar.gz"
+  sha256 "24d0de255d1be0ef6420eb03fe086e02d858bd7d17c57dd803bbb2f96f2f9a53"
   head "https://hg.nginx.org/unit", :using => :hg
 
   option "with-debug", "Build with debug logging enabled"
@@ -12,6 +12,7 @@ class NginxUnit < Formula
   depends_on "openssl"
   depends_on "pcre"
 
+  depends_on "php" => :optional
   depends_on "go" => :optional
   depends_on "perl" => :optional
   depends_on "python" => :optional
@@ -39,6 +40,10 @@ class NginxUnit < Formula
     end
 
     system "./configure", *configure_args
+
+    if build.with? "php"
+      system "./configure", "php", "--lib-static", "--lib-path=#{Formula["php"].opt_lib}"
+    end
 
     if build.with? "go"
       system "./configure", "go"
