@@ -12,7 +12,7 @@ class NginxUnit < Formula
   depends_on "openssl"
   depends_on "pcre"
 
-  depends_on "php" => :optional
+  depends_on "maxmedia/nginx-unit/php" => :optional
   depends_on "go" => :optional
   depends_on "perl" => :optional
   depends_on "python" => :optional
