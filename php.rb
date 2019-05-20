@@ -1,14 +1,8 @@
 class Php < Formula
   desc "General-purpose scripting language"
   homepage "https://secure.php.net/"
-  url "https://php.net/get/php-7.2.12.tar.xz/from/this/mirror"
-  sha256 "989c04cc879ee71a5e1131db867f3c5102f1f7565f805e2bb8bde33f93147fe1"
-
-  bottle do
-    sha256 "1f9e923929ff5131498c885444ccb07cad685d04a07129fecfb32703dbda2f0f" => :mojave
-    sha256 "1fe625669a1d1245a5fa981f10cebfdd4d8fd3e861d1ef97bf06306a342c154d" => :high_sierra
-    sha256 "ba1c8f6af0bf9cae24fcee0ca36805f11907cc94ccd0ac98b53014c8dc83e834" => :sierra
-  end
+  url "https://php.net/get/php-7.2.18.tar.xz/from/this/mirror"
+  sha256 "e1011838a46fd4a195c8453b333916622d7ff5bce4aca2d9d99afac142db2472"
 
   option "with-php-embed", "Build with embedded SAPI library"
 
@@ -19,7 +13,6 @@ class Php < Formula
   depends_on "argon2"
   depends_on "aspell"
   depends_on "autoconf"
-  depends_on "curl" if MacOS.version < :lion
   depends_on "freetds"
   depends_on "freetype"
   depends_on "gettext"
@@ -46,7 +39,7 @@ class Php < Formula
 
   def install
     # Ensure that libxml2 will be detected correctly in older MacOS
-    if MacOS.version == :el_capitan || MacOS.version == :sierra
+    if MacOS.version == :sierra
       ENV["SDKROOT"] = MacOS.sdk_path
     end
 
@@ -158,12 +151,6 @@ class Php < Formula
       --with-xsl#{headers_path}
       --with-zlib#{headers_path}
     ]
-
-    if MacOS.version < :lion
-      args << "--with-curl=#{Formula["curl"].opt_prefix}"
-    else
-      args << "--with-curl#{headers_path}"
-    end
 
     if MacOS.sdk_path_if_needed
       args << "--with-ldap=#{Formula["openldap"].opt_prefix}"
