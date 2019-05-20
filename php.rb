@@ -44,8 +44,6 @@ class Php < Formula
   # see https://github.com/php/php-src/pull/3472
   patch :DATA
 
-  needs :cxx11
-
   def install
     # Ensure that libxml2 will be detected correctly in older MacOS
     if MacOS.version == :el_capitan || MacOS.version == :sierra
@@ -78,9 +76,6 @@ class Php < Formula
 
       inreplace "sapi/fpm/php-fpm.conf.in", ";daemonize = yes", "daemonize = no"
     end
-
-    # Required due to icu4c dependency
-    ENV.cxx11
 
     config_path = etc/"php/#{php_version}"
     # Prevent system pear config from inhibiting pear install
