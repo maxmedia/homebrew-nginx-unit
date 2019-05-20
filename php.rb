@@ -13,7 +13,6 @@ class Php < Formula
   depends_on "argon2"
   depends_on "aspell"
   depends_on "autoconf"
-  depends_on "curl" if MacOS.version < :lion
   depends_on "freetds"
   depends_on "freetype"
   depends_on "gettext"
@@ -40,7 +39,7 @@ class Php < Formula
 
   def install
     # Ensure that libxml2 will be detected correctly in older MacOS
-    if MacOS.version == :el_capitan || MacOS.version == :sierra
+    if MacOS.version == :sierra
       ENV["SDKROOT"] = MacOS.sdk_path
     end
 
@@ -152,12 +151,6 @@ class Php < Formula
       --with-xsl#{headers_path}
       --with-zlib#{headers_path}
     ]
-
-    if MacOS.version < :lion
-      args << "--with-curl=#{Formula["curl"].opt_prefix}"
-    else
-      args << "--with-curl#{headers_path}"
-    end
 
     if MacOS.sdk_path_if_needed
       args << "--with-ldap=#{Formula["openldap"].opt_prefix}"
