@@ -4,12 +4,6 @@ class Php < Formula
   url "https://php.net/get/php-7.2.18.tar.xz/from/this/mirror"
   sha256 "e1011838a46fd4a195c8453b333916622d7ff5bce4aca2d9d99afac142db2472"
 
-  bottle do
-    sha256 "1f9e923929ff5131498c885444ccb07cad685d04a07129fecfb32703dbda2f0f" => :mojave
-    sha256 "1fe625669a1d1245a5fa981f10cebfdd4d8fd3e861d1ef97bf06306a342c154d" => :high_sierra
-    sha256 "ba1c8f6af0bf9cae24fcee0ca36805f11907cc94ccd0ac98b53014c8dc83e834" => :sierra
-  end
-
   option "with-php-embed", "Build with embedded SAPI library"
 
   depends_on "httpd" => [:build, :test]
